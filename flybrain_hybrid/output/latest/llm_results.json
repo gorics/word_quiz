@@ -1,0 +1,50 @@
+{
+  "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "backbone_frozen": true,
+  "outputs": {
+    "sweet_food": {
+      "adapter_decoded_state": "sweet_food",
+      "adapter_probabilities": {
+        "sweet_food": 0.9998699426651001,
+        "visual_light": 6.00758648943156e-05,
+        "touch": 2.5369934519403614e-05,
+        "warm": 4.4579624955076724e-05
+      },
+      "prompt": "You are interpreting a simulated Drosophila connectome state. The fly brain is responding to sweet food and feeding-related sensory input. The most active functional groups are: GUS_GRN_SWEET. Describe the current state in one concise factual sentence.",
+      "output": "The fly's brain is currently engaged in processing sweet food and engaging in feeding behaviors."
+    },
+    "visual_light": {
+      "adapter_decoded_state": "visual_light",
+      "adapter_probabilities": {
+        "sweet_food": 3.0119788789306767e-05,
+        "visual_light": 0.9999158382415771,
+        "touch": 3.9548769564135e-05,
+        "warm": 1.4459573321801145e-05
+      },
+      "prompt": "You are interpreting a simulated Drosophila connectome state. The fly brain is receiving strong visual input and orienting toward light. The most active functional groups are: VIS_ME, VIS_R1R6, VIS_LPTC, VIS_LO. Describe the current state in one concise factual sentence.",
+      "output": "The fly's visual system is actively focused on detecting and processing visual information from its environment, with VIS_ME and VIS_R1R6 being the most prominent activity areas."
+    },
+    "touch": {
+      "adapter_decoded_state": "touch",
+      "adapter_probabilities": {
+        "sweet_food": 1.8782058759825304e-05,
+        "visual_light": 8.2081496657338e-05,
+        "touch": 0.9998682737350464,
+        "warm": 3.0827595765003935e-05
+      },
+      "prompt": "You are interpreting a simulated Drosophila connectome state. The fly brain is responding to sudden mechanosensory touch and a startle-like event. The most active functional groups are: MECH_BRISTLE. Describe the current state in one concise factual sentence.",
+      "output": "The fly's motor control system is currently engaged in a rapid, high-frequency response to a sudden mechanical stimulus, with the most active functional groups being MECH_BRISTLE."
+    },
+    "warm": {
+      "adapter_decoded_state": "warm",
+      "adapter_probabilities": {
+        "sweet_food": 2.996782677655574e-05,
+        "visual_light": 5.855866402271204e-05,
+        "touch": 4.118930155527778e-05,
+        "warm": 0.9998703002929688
+      },
+      "prompt": "You are interpreting a simulated Drosophila connectome state. The fly brain is responding to warm temperature sensory input. The most active functional groups are: THERMO_WARM. Describe the current state in one concise factual sentence.",
+      "output": "The fly's brain is currently responding to warmth-induced changes in its thermosensory activity, with the most active functional groups being THERMO_WARM."
+    }
+  }
+}

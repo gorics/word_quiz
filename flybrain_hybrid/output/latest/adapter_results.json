@@ -1,0 +1,88 @@
+{
+  "architecture": "63 -> 64 -> 32 -> 4",
+  "training": "cross-entropy on noisy augmentations of four real connectome activity states",
+  "trace": [
+    {
+      "step": 1,
+      "loss": 1.4140552282333374,
+      "accuracy": 0.25
+    },
+    {
+      "step": 2,
+      "loss": 1.3308348655700684,
+      "accuracy": 0.4635416567325592
+    },
+    {
+      "step": 3,
+      "loss": 1.2505463361740112,
+      "accuracy": 0.7604166865348816
+    },
+    {
+      "step": 5,
+      "loss": 1.0874618291854858,
+      "accuracy": 1.0
+    },
+    {
+      "step": 10,
+      "loss": 0.6269487142562866,
+      "accuracy": 1.0
+    },
+    {
+      "step": 25,
+      "loss": 0.018474031239748,
+      "accuracy": 1.0
+    },
+    {
+      "step": 50,
+      "loss": 0.0008968216716311872,
+      "accuracy": 1.0
+    },
+    {
+      "step": 100,
+      "loss": 0.00039679754991084337,
+      "accuracy": 1.0
+    },
+    {
+      "step": 200,
+      "loss": 0.00020651122031267732,
+      "accuracy": 1.0
+    },
+    {
+      "step": 350,
+      "loss": 0.00010103974636876956,
+      "accuracy": 1.0
+    }
+  ],
+  "real_state_probabilities": {
+    "sweet_food": {
+      "sweet_food": 0.9998699426651001,
+      "visual_light": 6.00758648943156e-05,
+      "touch": 2.5369934519403614e-05,
+      "warm": 4.4579624955076724e-05
+    },
+    "visual_light": {
+      "sweet_food": 3.0119788789306767e-05,
+      "visual_light": 0.9999158382415771,
+      "touch": 3.9548769564135e-05,
+      "warm": 1.4459573321801145e-05
+    },
+    "touch": {
+      "sweet_food": 1.8782058759825304e-05,
+      "visual_light": 8.2081496657338e-05,
+      "touch": 0.9998682737350464,
+      "warm": 3.0827595765003935e-05
+    },
+    "warm": {
+      "sweet_food": 2.996782677655574e-05,
+      "visual_light": 5.855866402271204e-05,
+      "touch": 4.118930155527778e-05,
+      "warm": 0.9998703002929688
+    }
+  },
+  "real_state_predictions": {
+    "sweet_food": "sweet_food",
+    "visual_light": "visual_light",
+    "touch": "touch",
+    "warm": "warm"
+  }
+}

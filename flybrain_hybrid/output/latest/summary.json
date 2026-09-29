@@ -1,0 +1,15 @@
+{
+  "seed": 20260929,
+  "flybrain_upstream_commit": "9191824d17871b7851645782d53d23f213ddb938",
+  "neuron_count": 139255,
+  "edge_count": 2698236,
+  "connectome_sha256": "fbf8d440ca1207c7573e1acdd2366f9d0beb9b533c1710f21681264f81b1cc49",
+  "adapter_final": {
+    "step": 350,
+    "loss": 0.00010103974636876956,
+    "accuracy": 1.0
+  },
+  "llm_model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "sd_model_used": "segmind/tiny-sd",
+  "elapsed_sec": 72.465
+}

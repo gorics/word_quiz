@@ -1,0 +1,24 @@
+[flybrain-hybrid] parsed connectome: 139,255 neurons, 2,698,236 edges, sha256=fbf8d440ca1207c7573e1acdd2366f9d0beb9b533c1710f21681264f81b1cc49
+[flybrain-hybrid] brain state=sweet_food stim_neurons=214 spikes=2,140 top=[{'group_id': 32, 'name': 'GUS_GRN_SWEET', 'feature': 1.0}]
+[flybrain-hybrid] brain state=visual_light stim_neurons=93,805 spikes=938,250 top=[{'group_id': 2, 'name': 'VIS_ME', 'feature': 0.7172569632530212}, {'group_id': 0, 'name': 'VIS_R1R6', 'feature': 0.6079933047294617}, {'group_id': 5, 'name': 'VIS_LPTC', 'feature': 0.21592523157596588}, {'group_id': 3, 'name': 'VIS_LO', 'feature': 0.20867818593978882}]
+[flybrain-hybrid] brain state=touch stim_neurons=1,927 spikes=19,270 top=[{'group_id': 10, 'name': 'MECH_BRISTLE', 'feature': 1.0}]
+[flybrain-hybrid] brain state=warm stim_neurons=49 spikes=490 top=[{'group_id': 14, 'name': 'THERMO_WARM', 'feature': 1.0}]
+[flybrain-hybrid] adapter step=1 loss=1.414055 acc=0.2500
+[flybrain-hybrid] adapter step=2 loss=1.330835 acc=0.4635
+[flybrain-hybrid] adapter step=3 loss=1.250546 acc=0.7604
+[flybrain-hybrid] adapter step=5 loss=1.087462 acc=1.0000
+[flybrain-hybrid] adapter step=10 loss=0.626949 acc=1.0000
+[flybrain-hybrid] adapter step=25 loss=0.018474 acc=1.0000
+[flybrain-hybrid] adapter step=50 loss=0.000897 acc=1.0000
+[flybrain-hybrid] adapter step=100 loss=0.000397 acc=1.0000
+[flybrain-hybrid] adapter step=200 loss=0.000207 acc=1.0000
+[flybrain-hybrid] adapter step=350 loss=0.000101 acc=1.0000
+[flybrain-hybrid] loading LLM HuggingFaceTB/SmolLM2-135M-Instruct
+[flybrain-hybrid] LLM sweet_food -> sweet_food: The fly's brain is currently engaged in processing sweet food and engaging in feeding behaviors.
+[flybrain-hybrid] LLM visual_light -> visual_light: The fly's visual system is actively focused on detecting and processing visual information from its environment, with VIS_ME and VIS_R1R6 being the most prominent activity areas.
+[flybrain-hybrid] LLM touch -> touch: The fly's motor control system is currently engaged in a rapid, high-frequency response to a sudden mechanical stimulus, with the most active functional groups being MECH_BRISTLE.
+[flybrain-hybrid] LLM warm -> warm: The fly's brain is currently responding to warmth-induced changes in its thermosensory activity, with the most active functional groups being THERMO_WARM.
+[flybrain-hybrid] loading Stable Diffusion segmind/tiny-sd
+[flybrain-hybrid] SD sweet_food -> sweet_food: flybrain-hybrid-results/sd_sweet_food.png 42749d06490edb12
+[flybrain-hybrid] SD touch -> touch: flybrain-hybrid-results/sd_touch.png b2e7b2b972282589
+[flybrain-hybrid] DONE {"seed": 20260929, "flybrain_upstream_commit": "9191824d17871b7851645782d53d23f213ddb938", "neuron_count": 139255, "edge_count": 2698236, "connectome_sha256": "fbf8d440ca1207c7573e1acdd2366f9d0beb9b533c1710f21681264f81b1cc49", "adapter_final": {"step": 350, "loss": 0.00010103974636876956, "accuracy": 1.0}, "llm_model": "HuggingFaceTB/SmolLM2-135M-Instruct", "sd_model_used": "segmind/tiny-sd", "elapsed_sec": 72.465}

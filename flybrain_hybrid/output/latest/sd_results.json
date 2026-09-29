@@ -1,0 +1,30 @@
+{
+  "model_requested": "segmind/tiny-sd",
+  "model_used": "segmind/tiny-sd",
+  "primary_load_error": null,
+  "backbone_frozen": true,
+  "generated": {
+    "sweet_food": {
+      "adapter_decoded_state": "sweet_food",
+      "prompt": "macro photograph of a fruit fly feeding on ripe red fruit, detailed natural light, realistic biology",
+      "file": "sd_sweet_food.png",
+      "sha256": "42749d06490edb120fec5ae2d0852a8c01f800cf675fec917f1deaa3110c9404",
+      "size": [
+        256,
+        256
+      ],
+      "elapsed_sec": 13.103
+    },
+    "touch": {
+      "adapter_decoded_state": "touch",
+      "prompt": "macro photograph of a startled fruit fly reacting to sudden touch, realistic insect, fast movement",
+      "file": "sd_touch.png",
+      "sha256": "b2e7b2b9722825893c9de4a55cc953c19562a3fe5503c4444c035a9a2db772bb",
+      "size": [
+        256,
+        256
+      ],
+      "elapsed_sec": 12.985
+    }
+  }
+}

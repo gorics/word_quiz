@@ -1,0 +1,121 @@
+{
+  "neuron_count": 139255,
+  "edge_count": 2698236,
+  "connectome_sha256": "fbf8d440ca1207c7573e1acdd2366f9d0beb9b533c1710f21681264f81b1cc49",
+  "lif_constants": {
+    "leak": 0.95,
+    "threshold": 1.0,
+    "refractory_ticks": 3,
+    "weight_scale": 0.15,
+    "stimulus_intensity": 0.15
+  },
+  "states": {
+    "sweet_food": {
+      "stimulus_group_ids": [
+        32
+      ],
+      "stimulated_neurons": 214,
+      "total_spikes": 2140,
+      "top_active_groups": [
+        {
+          "group_id": 32,
+          "name": "GUS_GRN_SWEET",
+          "feature": 1.0
+        }
+      ],
+      "elapsed_sec": 0.074
+    },
+    "visual_light": {
+      "stimulus_group_ids": [
+        0,
+        2
+      ],
+      "stimulated_neurons": 93805,
+      "total_spikes": 938250,
+      "top_active_groups": [
+        {
+          "group_id": 2,
+          "name": "VIS_ME",
+          "feature": 0.7172569632530212
+        },
+        {
+          "group_id": 0,
+          "name": "VIS_R1R6",
+          "feature": 0.6079933047294617
+        },
+        {
+          "group_id": 5,
+          "name": "VIS_LPTC",
+          "feature": 0.21592523157596588
+        },
+        {
+          "group_id": 3,
+          "name": "VIS_LO",
+          "feature": 0.20867818593978882
+        },
+        {
+          "group_id": 60,
+          "name": "GENERIC_CENTRAL",
+          "feature": 0.16036304831504822
+        }
+      ],
+      "elapsed_sec": 0.25
+    },
+    "touch": {
+      "stimulus_group_ids": [
+        10
+      ],
+      "stimulated_neurons": 1927,
+      "total_spikes": 19270,
+      "top_active_groups": [
+        {
+          "group_id": 10,
+          "name": "MECH_BRISTLE",
+          "feature": 1.0
+        }
+      ],
+      "elapsed_sec": 0.082
+    },
+    "warm": {
+      "stimulus_group_ids": [
+        14
+      ],
+      "stimulated_neurons": 49,
+      "total_spikes": 490,
+      "top_active_groups": [
+        {
+          "group_id": 14,
+          "name": "THERMO_WARM",
+          "feature": 1.0
+        }
+      ],
+      "elapsed_sec": 0.071
+    }
+  },
+  "feature_cosine_similarity": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ]
+}
