@@ -1,0 +1,72 @@
+name: FlyBrain Hybrid Real Run
+
+on:
+  push:
+    branches: [flybrain-hybrid-20260929]
+    paths:
+      - 'flybrain-hybrid/**'
+      - '.github/workflows/flybrain-hybrid-real-run.yml'
+  workflow_dispatch:
+
+jobs:
+  run-hybrid:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      HF_HUB_DISABLE_XET: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch FlyBrain and verify its simulator tests
+        run: |
+          git clone --depth 1 https://github.com/snedea/flybrain.git /tmp/flybrain
+          cd /tmp/flybrain
+          node tests/run-node.js | tee "$GITHUB_WORKSPACE/flybrain-hybrid/flybrain-tests.log"
+          ls -lh data/connectome.bin.gz data/neuron_meta.json
+
+      - name: Install open-source runtimes
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy transformers diffusers accelerate safetensors sentencepiece
+          python - <<'PY'
+          import torch
+          print('torch', torch.__version__, 'cuda', torch.cuda.is_available())
+          PY
+
+      - name: Train connectome control adapter
+        run: |
+          mkdir -p flybrain-hybrid/results
+          python flybrain-hybrid/brain_adapter.py --data /tmp/flybrain/data --out flybrain-hybrid/results --scenario food_seek | tee flybrain-hybrid/results/adapter-run.log
+
+      - name: Run real SmolLM2 and Stable Diffusion
+        run: |
+          python flybrain-hybrid/generate_models.py | tee flybrain-hybrid/results/generation-run.log
+
+      - name: Record environment
+        if: always()
+        run: |
+          {
+            echo "commit=$GITHUB_SHA"
+            echo "runner=$(uname -a)"
+            echo "python=$(python --version 2>&1)"
+            echo "node=$(node --version 2>&1)"
+            echo "date=$(date -u +%FT%TZ)"
+          } > flybrain-hybrid/results/environment.txt
+          find flybrain-hybrid/results -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
+
+      - name: Upload outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flybrain-hybrid-results
+          path: |
+            flybrain-hybrid/results/**
+            flybrain-hybrid/flybrain-tests.log
+          if-no-files-found: warn
+          retention-days: 30
