@@ -1,0 +1,88 @@
+name: FlyBrain Hybrid Actual Run
+
+on:
+  push:
+    branches: [flybrain-hybrid-run]
+    paths:
+      - 'flybrain_hybrid/**'
+      - '.github/workflows/flybrain-hybrid-run.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: flybrain-hybrid-actual-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '4'
+      MKL_NUM_THREADS: '4'
+    steps:
+      - name: Checkout experiment branch
+        uses: actions/checkout@v4
+        with:
+          ref: flybrain-hybrid-run
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install CPU ML stack
+        run: |
+          python -m pip install --upgrade pip
+          pip install --index-url https://download.pytorch.org/whl/cpu torch==2.5.1
+          pip install transformers==4.46.3 diffusers==0.31.0 accelerate==1.2.1 huggingface-hub==0.27.0 safetensors==0.4.5 scipy==1.14.1 pillow==11.0.0 requests==2.32.3 sentencepiece==0.2.0
+
+      - name: Clone open-source FlyBrain from GitHub
+        run: |
+          rm -rf /tmp/flybrain
+          git clone --depth 1 https://github.com/snedea/flybrain.git /tmp/flybrain
+          git -C /tmp/flybrain rev-parse HEAD | tee /tmp/flybrain_commit.txt
+          ls -lh /tmp/flybrain/data/connectome.bin.gz /tmp/flybrain/data/neuron_meta.json
+
+      - name: Execute connectome, train adapter, run LLM and Stable Diffusion
+        env:
+          FLY_REPO: /tmp/flybrain
+          FLY_OUT: flybrain-hybrid-results
+        run: |
+          export FLY_UPSTREAM_COMMIT="$(cat /tmp/flybrain_commit.txt)"
+          python -u flybrain_hybrid/run_hybrid.py | tee flybrain-hybrid-results-run.log
+
+      - name: Save runner metadata
+        if: always()
+        run: |
+          mkdir -p flybrain-hybrid-results
+          cp /tmp/flybrain_commit.txt flybrain-hybrid-results/flybrain_upstream_commit.txt 2>/dev/null || true
+          cp flybrain-hybrid-results-run.log flybrain-hybrid-results/runner.log 2>/dev/null || true
+          echo "$GITHUB_RUN_ID" > flybrain-hybrid-results/github_run_id.txt
+          echo "$GITHUB_SHA" > flybrain-hybrid-results/github_trigger_sha.txt
+
+      - name: Upload actual outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flybrain-hybrid-actual-${{ github.run_id }}
+          path: flybrain-hybrid-results/
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Persist outputs on experiment branch
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf flybrain_hybrid/output/latest
+          mkdir -p flybrain_hybrid/output/latest
+          if [ -d flybrain-hybrid-results ]; then cp -a flybrain-hybrid-results/. flybrain_hybrid/output/latest/; fi
+          git add flybrain_hybrid/output/latest
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Persist FlyBrain hybrid actual outputs [skip ci]'
+          git push origin HEAD:flybrain-hybrid-run
